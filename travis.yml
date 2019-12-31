@@ -13,4 +13,10 @@ after_sucess:
     - docker build -t flavioseixas/multi-nginx ./nginx
     - docker build -t flavioseixas/multi-server ./server
     - docker build -t flavioseixas/multi-worder ./worker
-    
+    # Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # Take those images and push them to docker hub
+    - docker push flavioseixas/multi-client
+    - docker push flavioseixas/multi-nginx
+    - docker push flavioseixas/multi-server
+    - docker push flavioseixas/multi-worder
