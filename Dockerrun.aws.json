@@ -1,0 +1,22 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "flavioseixas/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "flavioseixas/multi-server",
+            "hostname": "api",
+            "essential": false
+        },        
+        {
+            "name": "worker",
+            "image": "flavioseixas/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        }, 
+    ]
