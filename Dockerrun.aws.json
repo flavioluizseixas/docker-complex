@@ -18,5 +18,19 @@
             "image": "flavioseixas/multi-worker",
             "hostname": "worker",
             "essential": false
-        }, 
+        },
+        {
+            "name": "nginx",
+            "image": "flavioseixas/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
     ]
+}

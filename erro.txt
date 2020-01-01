@@ -1,0 +1,882 @@
+ ---> 23180db42730
+Step 6/6 : CMD ["npm", "run", "start"]
+ ---> Running in 97478ad5d161
+Removing intermediate container 97478ad5d161
+ ---> b82f32aa6883
+Successfully built b82f32aa6883
+Successfully tagged docker-complex_client:latest
+Building worker
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR "/app"
+ ---> Using cache
+ ---> 28640fd1ffd7
+Step 3/6 : COPY ./package.json ./
+ ---> 5d63da2b3e8f
+Step 4/6 : RUN npm install
+ ---> Running in 6621c9035958
+
+> nodemon@1.18.3 postinstall /app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN app No description
+npm WARN app No repository field.
+npm WARN app No license field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 225 packages from 132 contributors and audited 2276 packages in 25.17s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container 6621c9035958
+ ---> cf29365c83f1
+Step 5/6 : COPY . .
+ ---> 852a7f648137
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Running in 61d3ba21a14e
+Removing intermediate container 61d3ba21a14e
+ ---> b9f26138fb39
+Successfully built b9f26138fb39
+Successfully tagged docker-complex_worker:latest
+Creating docker-complex_postgres_1 ... done
+Creating docker-complex_api_1      ... done
+Creating docker-complex_nginx_1    ... done
+Creating docker-complex_client_1   ... done
+Creating docker-complex_worker_1   ... done
+Creating docker-complex_redis_1    ... done
+Attaching to docker-complex_redis_1, docker-complex_postgres_1, docker-complex_worker_1, docker-complex_nginx_1, docker-complex_api_1, docker-complex_client_1
+redis_1     | 1:C 01 Jan 2020 15:28:57.336 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1     | 1:C 01 Jan 2020 15:28:57.336 # Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1     | 1:C 01 Jan 2020 15:28:57.336 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_1     | 1:M 01 Jan 2020 15:28:57.341 * Running mode=standalone, port=6379.
+redis_1     | 1:M 01 Jan 2020 15:28:57.341 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+redis_1     | 1:M 01 Jan 2020 15:28:57.341 # Server initialized
+redis_1     | 1:M 01 Jan 2020 15:28:57.341 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+redis_1     | 1:M 01 Jan 2020 15:28:57.342 * Ready to accept connections
+worker_1    | 
+worker_1    | > @ dev /app
+worker_1    | > nodemon
+worker_1    | 
+worker_1    | [nodemon] 1.18.3
+worker_1    | [nodemon] to restart at any time, enter `rs`
+worker_1    | [nodemon] watching: *.*
+worker_1    | [nodemon] starting `node index.js`
+postgres_1  | ****************************************************
+postgres_1  | WARNING: No password has been set for the database.
+postgres_1  |          This will allow anyone with access to the
+postgres_1  |          Postgres port to access your database. In
+postgres_1  |          Docker's default configuration, this is
+postgres_1  |          effectively any other container on the same
+postgres_1  |          system.
+postgres_1  | 
+postgres_1  |          Use "-e POSTGRES_PASSWORD=password" to set
+postgres_1  |          it in "docker run".
+postgres_1  | ****************************************************
+nginx_1     | 2020/01/01 15:28:59 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+nginx_1     | nginx: [emerg] host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+postgres_1  | The files belonging to this database system will be owned by user "postgres".
+postgres_1  | This user must also own the server process.
+postgres_1  | 
+api_1       | 
+api_1       | > @ dev /app
+api_1       | > nodemon
+api_1       | 
+postgres_1  | The database cluster will be initialized with locale "en_US.utf8".
+postgres_1  | The default database encoding has accordingly been set to "UTF8".
+postgres_1  | The default text search configuration will be set to "english".
+postgres_1  | 
+postgres_1  | Data page checksums are disabled.
+postgres_1  | 
+postgres_1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres_1  | creating subdirectories ... ok
+postgres_1  | selecting dynamic shared memory implementation ... posix
+postgres_1  | selecting default max_connections ... 100
+postgres_1  | selecting default shared_buffers ... 128MB
+postgres_1  | selecting default time zone ... Etc/UTC
+postgres_1  | creating configuration files ... ok
+api_1       | [nodemon] 1.18.3
+api_1       | [nodemon] to restart at any time, enter `rs`
+api_1       | [nodemon] watching: *.*
+api_1       | [nodemon] starting `node index.js`
+postgres_1  | running bootstrap script ... ok
+postgres_1  | performing post-bootstrap initialization ... ok
+postgres_1  | syncing data to disk ... ok
+postgres_1  | 
+postgres_1  | 
+postgres_1  | Success. You can now start the database server using:
+postgres_1  | 
+postgres_1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres_1  | 
+postgres_1  | initdb: warning: enabling "trust" authentication for local connections
+postgres_1  | You can change this by editing pg_hba.conf or using the option -A, or
+postgres_1  | --auth-local and --auth-host, the next time you run initdb.
+postgres_1  | waiting for server to start....2020-01-01 15:29:04.648 UTC [45] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 15:29:04.654 UTC [45] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1  | 2020-01-01 15:29:04.833 UTC [46] LOG:  database system was shut down at 2020-01-01 15:29:02 UTC
+postgres_1  | 2020-01-01 15:29:04.849 UTC [45] LOG:  database system is ready to accept connections
+api_1       | Listening
+postgres_1  |  done
+postgres_1  | server started
+postgres_1  | 
+postgres_1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres_1  | 
+postgres_1  | 2020-01-01 15:29:04.902 UTC [45] LOG:  received fast shutdown request
+postgres_1  | waiting for server to shut down....2020-01-01 15:29:04.906 UTC [45] LOG:  aborting any active transactions
+postgres_1  | 2020-01-01 15:29:04.945 UTC [45] LOG:  background worker "logical replication launcher" (PID 52) exited with exit code 1
+postgres_1  | 2020-01-01 15:29:04.947 UTC [47] LOG:  shutting down
+postgres_1  | 2020-01-01 15:29:05.022 UTC [45] LOG:  database system is shut down
+postgres_1  |  done
+postgres_1  | server stopped
+postgres_1  | 
+postgres_1  | PostgreSQL init process complete; ready for start up.
+postgres_1  | 
+postgres_1  | 2020-01-01 15:29:05.157 UTC [1] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 15:29:05.157 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_1  | 2020-01-01 15:29:05.158 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_1  | 2020-01-01 15:29:05.187 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1  | 2020-01-01 15:29:05.257 UTC [54] LOG:  database system was shut down at 2020-01-01 15:29:04 UTC
+postgres_1  | 2020-01-01 15:29:05.289 UTC [1] LOG:  database system is ready to accept connections
+client_1    | 
+client_1    | > client@0.1.0 start /app
+client_1    | > react-scripts start
+client_1    | 
+docker-complex_nginx_1 exited with code 1
+client_1    | ℹ ｢wds｣: Project is running at http://172.22.0.4/
+client_1    | ℹ ｢wds｣: webpack output is served from /
+client_1    | ℹ ｢wds｣: Content not from webpack is served from /app/public
+client_1    | ℹ ｢wds｣: 404s will fallback to /index.html
+client_1    | Starting the development server...
+client_1    | 
+nginx_1     | 2020/01/01 15:29:50 [emerg] 1#1: unexpected "}" in /etc/nginx/conf.d/default.conf:6
+nginx_1     | nginx: [emerg] unexpected "}" in /etc/nginx/conf.d/default.conf:6
+client_1    | Compiled successfully!
+client_1    | 
+client_1    | You can now view client in the browser.
+client_1    | 
+client_1    |   Local:            http://localhost:3000/
+client_1    |   On Your Network:  http://172.22.0.4:3000/
+client_1    | 
+client_1    | Note that the development build is not optimized.
+client_1    | To create a production build, use npm run build.
+client_1    | 
+nginx_1     | 2020/01/01 15:30:19 [emerg] 1#1: unexpected "}" in /etc/nginx/conf.d/default.conf:6
+nginx_1     | nginx: [emerg] unexpected "}" in /etc/nginx/conf.d/default.conf:6
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+docker-complex_nginx_1 exited with code 1
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping docker-complex_nginx_1    ... done
+Stopping docker-complex_postgres_1 ... done
+Stopping docker-complex_client_1   ... done
+Stopping docker-complex_worker_1   ... done
+Stopping docker-complex_api_1      ... done
+Stopping docker-complex_redis_1    ... done
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker-compose down
+Removing docker-complex_nginx_1    ... done
+Removing docker-complex_postgres_1 ... done
+Removing docker-complex_client_1   ... done
+Removing docker-complex_worker_1   ... done
+Removing docker-complex_api_1      ... done
+Removing docker-complex_redis_1    ... done
+Removing network docker-complex_default
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker-compose up --build
+Creating network "docker-complex_default" with the default driver
+Building nginx
+Step 1/2 : FROM nginx
+ ---> f7bb5701a33c
+Step 2/2 : COPY ./default.conf /etc/nginx/conf.d/default.conf
+ ---> f57512c3035f
+Successfully built f57512c3035f
+Successfully tagged docker-complex_nginx:latest
+Building api
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR "/app"
+ ---> Using cache
+ ---> 28640fd1ffd7
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> e4f0fc8b4ab0
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> 6765bf20a244
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> 33dcc5a9d3e8
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Using cache
+ ---> 4bc61be0c76f
+Successfully built 4bc61be0c76f
+Successfully tagged docker-complex_api:latest
+Building client
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 28640fd1ffd7
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> a99d84094746
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> 4c248aa0390c
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> 23180db42730
+Step 6/6 : CMD ["npm", "run", "start"]
+ ---> Using cache
+ ---> b82f32aa6883
+Successfully built b82f32aa6883
+Successfully tagged docker-complex_client:latest
+Building worker
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR "/app"
+ ---> Using cache
+ ---> 28640fd1ffd7
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> 5d63da2b3e8f
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> cf29365c83f1
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> 852a7f648137
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Using cache
+ ---> b9f26138fb39
+Successfully built b9f26138fb39
+Successfully tagged docker-complex_worker:latest
+Creating docker-complex_nginx_1    ... done
+Creating docker-complex_worker_1   ... done
+Creating docker-complex_redis_1    ... done
+Creating docker-complex_postgres_1 ... done
+Creating docker-complex_client_1   ... done
+Creating docker-complex_api_1      ... done
+Attaching to docker-complex_redis_1, docker-complex_nginx_1, docker-complex_postgres_1, docker-complex_worker_1, docker-complex_api_1, docker-complex_client_1
+redis_1     | 1:C 01 Jan 2020 17:21:18.129 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1     | 1:C 01 Jan 2020 17:21:18.129 # Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1     | 1:C 01 Jan 2020 17:21:18.148 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_1     | 1:M 01 Jan 2020 17:21:18.165 * Running mode=standalone, port=6379.
+redis_1     | 1:M 01 Jan 2020 17:21:18.187 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+redis_1     | 1:M 01 Jan 2020 17:21:18.187 # Server initialized
+redis_1     | 1:M 01 Jan 2020 17:21:18.187 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+redis_1     | 1:M 01 Jan 2020 17:21:18.188 * Ready to accept connections
+nginx_1     | 2020/01/01 17:21:18 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+nginx_1     | nginx: [emerg] host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+postgres_1  | ****************************************************
+postgres_1  | WARNING: No password has been set for the database.
+postgres_1  |          This will allow anyone with access to the
+postgres_1  |          Postgres port to access your database. In
+postgres_1  |          Docker's default configuration, this is
+postgres_1  |          effectively any other container on the same
+postgres_1  |          system.
+postgres_1  | 
+postgres_1  |          Use "-e POSTGRES_PASSWORD=password" to set
+postgres_1  |          it in "docker run".
+postgres_1  | ****************************************************
+postgres_1  | The files belonging to this database system will be owned by user "postgres".
+postgres_1  | This user must also own the server process.
+postgres_1  | 
+postgres_1  | The database cluster will be initialized with locale "en_US.utf8".
+postgres_1  | The default database encoding has accordingly been set to "UTF8".
+postgres_1  | The default text search configuration will be set to "english".
+postgres_1  | 
+postgres_1  | Data page checksums are disabled.
+postgres_1  | 
+postgres_1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres_1  | creating subdirectories ... ok
+postgres_1  | selecting dynamic shared memory implementation ... posix
+postgres_1  | selecting default max_connections ... 100
+postgres_1  | selecting default shared_buffers ... 128MB
+postgres_1  | selecting default time zone ... Etc/UTC
+postgres_1  | creating configuration files ... ok
+postgres_1  | running bootstrap script ... ok
+postgres_1  | performing post-bootstrap initialization ... ok
+postgres_1  | syncing data to disk ... ok
+postgres_1  | 
+postgres_1  | 
+postgres_1  | Success. You can now start the database server using:
+postgres_1  | 
+postgres_1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres_1  | 
+postgres_1  | waiting for server to start....initdb: warning: enabling "trust" authentication for local connections
+postgres_1  | You can change this by editing pg_hba.conf or using the option -A, or
+postgres_1  | --auth-local and --auth-host, the next time you run initdb.
+postgres_1  | 2020-01-01 17:21:23.125 UTC [46] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 17:21:23.133 UTC [46] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1  | 2020-01-01 17:21:23.186 UTC [47] LOG:  database system was shut down at 2020-01-01 17:21:20 UTC
+postgres_1  | 2020-01-01 17:21:23.203 UTC [46] LOG:  database system is ready to accept connections
+postgres_1  |  done
+postgres_1  | server started
+postgres_1  | 
+postgres_1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres_1  | 
+postgres_1  | waiting for server to shut down...2020-01-01 17:21:23.286 UTC [46] LOG:  received fast shutdown request
+postgres_1  | .2020-01-01 17:21:23.293 UTC [46] LOG:  aborting any active transactions
+postgres_1  | 2020-01-01 17:21:23.324 UTC [46] LOG:  background worker "logical replication launcher" (PID 53) exited with exit code 1
+postgres_1  | 2020-01-01 17:21:23.324 UTC [48] LOG:  shutting down
+postgres_1  | 2020-01-01 17:21:23.572 UTC [46] LOG:  database system is shut down
+postgres_1  |  done
+postgres_1  | server stopped
+postgres_1  | 
+postgres_1  | PostgreSQL init process complete; ready for start up.
+postgres_1  | 
+postgres_1  | 2020-01-01 17:21:23.619 UTC [1] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 17:21:23.620 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_1  | 2020-01-01 17:21:23.620 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_1  | 2020-01-01 17:21:23.639 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1  | 2020-01-01 17:21:23.709 UTC [55] LOG:  database system was shut down at 2020-01-01 17:21:23 UTC
+postgres_1  | 2020-01-01 17:21:23.743 UTC [1] LOG:  database system is ready to accept connections
+worker_1    | 
+worker_1    | > @ dev /app
+worker_1    | > nodemon
+worker_1    | 
+worker_1    | [nodemon] 1.18.3
+worker_1    | [nodemon] to restart at any time, enter `rs`
+worker_1    | [nodemon] watching: *.*
+worker_1    | [nodemon] starting `node index.js`
+api_1       | 
+api_1       | > @ dev /app
+api_1       | > nodemon
+api_1       | 
+api_1       | [nodemon] 1.18.3
+api_1       | [nodemon] to restart at any time, enter `rs`
+api_1       | [nodemon] watching: *.*
+api_1       | [nodemon] starting `node index.js`
+api_1       | Listening
+client_1    | 
+client_1    | > client@0.1.0 start /app
+client_1    | > react-scripts start
+client_1    | 
+client_1    | ℹ ｢wds｣: Project is running at http://172.23.0.2/
+client_1    | ℹ ｢wds｣: webpack output is served from /
+client_1    | ℹ ｢wds｣: Content not from webpack is served from /app/public
+client_1    | ℹ ｢wds｣: 404s will fallback to /index.html
+client_1    | Starting the development server...
+client_1    | 
+client_1    | Compiled successfully!
+client_1    | 
+client_1    | You can now view client in the browser.
+client_1    | 
+client_1    |   Local:            http://localhost:3000/
+client_1    |   On Your Network:  http://172.23.0.2:3000/
+client_1    | 
+client_1    | Note that the development build is not optimized.
+client_1    | To create a production build, use npm run build.
+client_1    | 
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping docker-complex_client_1   ... done
+Stopping docker-complex_worker_1   ... done
+Stopping docker-complex_postgres_1 ... done
+Stopping docker-complex_api_1      ... done
+Stopping docker-complex_redis_1    ... done
+Stopping docker-complex_nginx_1    ... done
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker-compose down      
+Removing docker-complex_client_1   ... done
+Removing docker-complex_worker_1   ... done
+Removing docker-complex_postgres_1 ... done
+Removing docker-complex_api_1      ... done
+Removing docker-complex_redis_1    ... done
+Removing docker-complex_nginx_1    ... done
+Removing network docker-complex_default
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker system prune -a   
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Images:
+untagged: redis:latest
+untagged: redis@sha256:21b037b4f6964887bb12fd8d72d06c7ab1f231a58781b6ca2ceee0febfeb0d36
+deleted: sha256:c33c9b2541a8fea04fe621e1e9d4e5973d9062f2a4eaac7a8d8b82c23c1b0aa8
+deleted: sha256:f848356c08033001312164ad23108497adde2432bdcd2a119dbfa8dcfea0cb13
+deleted: sha256:a4f3d75a03456a2b5f8f81892db93c08ec2eff54ae6b339a9191804cf484b863
+deleted: sha256:f8ad3d1bccd2b246988576bbbec5f0f079c2690e6e3d670338450a6d866612cc
+deleted: sha256:c80de70938af062d3c273f9925641ec672fe182a796bb4a096a37963c92e071a
+deleted: sha256:e807dfe0532b9dae274911841bab81588e9e34591a5b809b8da39471fb75fdbd
+untagged: docker-complex_client:latest
+deleted: sha256:b82f32aa6883dbea8e11c27ee181221e5bf75c17241e4fd08b7868f9cb9c52d1
+deleted: sha256:23180db427305ffd6fcec0dfabaa32cd8b6872a0637e60e4ef51e417f1d4e4b4
+deleted: sha256:65dd80207d922bc86495108c470edaae4e6b143a4c518360db086cd480714894
+deleted: sha256:4c248aa0390ca18a63d31f0dff949d296a95caffcf729d160fb327f74ef68880
+deleted: sha256:9c48fd5dbc9c5e86b065b1f89170dff742e5e194fed8192022c99dbbe0952030
+deleted: sha256:a99d84094746e83333751bd9c229113073f36bfd2ec8d294d40507b993a90eba
+deleted: sha256:b0bc5a0ee576a81e8bc63d88b6965516a5b7464e94d73abcdeb3c19e4ba30541
+deleted: sha256:470586b9894c3d810a00ad710eb8e9e1a448b33ee7d01ff803731dd834098029
+deleted: sha256:aeb79d4959e19cfba9cfe2098b5200ef0a3fbdb4f46dcea533d1f8f90050c26d
+untagged: postgres:latest
+untagged: postgres@sha256:3657548977d593c9ab6d70d1ffc43ceb3b5164ae07ac0f542d2ea139664eb6b3
+deleted: sha256:ec5d6d5f5b3434acb3652995f706f835ec4830f3443595688b5a010c6482e008
+deleted: sha256:a482f0a241a8c935a0ebea42ee9352217ff9cdde8b2d914de306d6090ed62cc3
+deleted: sha256:08a67166bf1e17c7cdbc7fc0529b46230b85f7ec7d1ad02382990cb7c0227501
+deleted: sha256:88ea6d7a79922462c09e38127a178b799373de3aea9568ff0fc10d0999fe4434
+deleted: sha256:9d84d77ec3364adfdba370754d14f427067eea03bea84123147c34de61c1b2b5
+deleted: sha256:595e38aa09d0c3592aeb8a50c0b81955e61cc11eb2984dfd4e892334c5f7b78e
+deleted: sha256:fe765acfc9d6c214ad44600916df1656a671263b268bf3ae7db7642f4f392388
+deleted: sha256:74487f313d623055a47abc8a6e87b89ae8ee1e3165c50e49bda8c153a8d4bbef
+deleted: sha256:8e8da440229327aad7e7c96fdcbdfce563d83d6f4e207861ac9836e96b079a6c
+deleted: sha256:e7752ee27e16c1cacb3ba0e4b9c443a2ee854ad029cdecdf3de6615d66e021fb
+deleted: sha256:07e0e166bd98f143f649e34cd3187aa457e4bfa02f8726f4306ed8c940c5ce7b
+deleted: sha256:cee3c03023ff1e082513962d2b0d2f59af352cffe5520fef409f0e4e6ed06ded
+deleted: sha256:58bd50f77534447595730c2954c5d78516d55674c8d256b02faf5ba8e739908c
+deleted: sha256:66e9cf20fcb4bf8b5168bcb72611028b618b31bae671d584e652b91c09cb0748
+untagged: nginx:latest
+untagged: nginx@sha256:b2d89d0a210398b4d1120b3e3a7672c16a4ba09c2c4a0395f18b9f7999b768f2
+untagged: docker-complex_nginx:latest
+deleted: sha256:f57512c3035ff0c94a119925bbfdfc5c2253311ab678a32956d8eb3177ff6606
+deleted: sha256:5b215958bcaeb59e9603ca55ccdd2f84ecb5447f5ba763d601adbf3aa0eff5ba
+deleted: sha256:f7bb5701a33c0e572ed06ca554edca1bee96cbbc1f76f3b01c985de7e19d0657
+deleted: sha256:8f1984cf0de0461043fcabd6b2a2040325ac001d9897a242e0d80486fe71575e
+deleted: sha256:59d91a36ba4b720eadfbf346ddb825c2faa2d66cc7a915238eaf926c4b4b40ee
+deleted: sha256:556c5fb0d91b726083a8ce42e2faaed99f11bc68d3f70e2c7bbce87e7e0b3e10
+untagged: docker-complex_api:latest
+deleted: sha256:4bc61be0c76f66a63d448df540f258d4e50b64a04e54a5e6ab7ebcf0a34f90f6
+deleted: sha256:33dcc5a9d3e8e6beba42f15c5f3348b56d7b4759c42e0947d0c1dc672b45e595
+deleted: sha256:d81656c1ef9d32190a6c4c886fa9bb8c27725481d06821d818e13a8b83739a66
+deleted: sha256:6765bf20a244599246a6ec723efaf3147004ec8f95cca958f5c31ca7095ca34f
+deleted: sha256:1dfdb3ae90256334bc3143f9316cc66bbe2fbc619ca09cbc7d52ee961226b60e
+deleted: sha256:e4f0fc8b4ab03defeaed78d87268c92a78046e5f411083602329c62df27a9c9b
+deleted: sha256:f34d63888f63826c88e8c55ef21074dbe0e07b496cff873036368e9abe81a7eb
+untagged: node:alpine
+untagged: node@sha256:b3f6a315aedc31ef3958108ce4926a52b4b4bcc93fca9655737d057de54f8157
+untagged: docker-complex_worker:latest
+deleted: sha256:b9f26138fb39d93a58628c68c15e6f9233211298de14bf9311eb8a9303bda9b3
+deleted: sha256:852a7f648137fa650c72d28ef287fafcee21404b28257d05ec42d6efd8f54e20
+deleted: sha256:b9d652b03d40c2b2dd9f68daa15e67f3911ab63b4ab029a4c00bee9fd2e0a0f3
+deleted: sha256:cf29365c83f10d586227fb21c280f230897e222765081dbb5c65b33d6f09c660
+deleted: sha256:de2ea8439c94328991326227aec1532a2e73020d6480d9fcf6c9d312ee896f4b
+deleted: sha256:5d63da2b3e8f0ce2e1bc6ef2a2b9d15ed7ea4f10e9385f9354fbd67ede2ad278
+deleted: sha256:11082a0c6f0cb6c34a45a7256d3a089b07ca6a8c2cecf7501aaf3f79bd09833d
+deleted: sha256:28640fd1ffd77fc912a0daa784eb45e4c4327260c6a3685deeabf08104a737e0
+deleted: sha256:e149ee5a09eea3768773b5edf9120d74c6b9b58e5a60bccf65ee65b248824ff9
+deleted: sha256:e1495e4ac50db1102c1c8a1e11445edba9db965ce6b54d4fd336ad3f0ea2745d
+deleted: sha256:faab9e0a9dda373fc39b3d12f55248cc725e6d3ba46e1aef30be77c9df3f612b
+deleted: sha256:35db45cd950b871a73570b89bcdb576457302c81988d111e395354d5030d0376
+deleted: sha256:0d7f06ee8d5b110eb6e0fd26eb5485622331f62b0db880ea2dea70b40ac08df6
+deleted: sha256:6b27de954cca6332272e7709b7d8ceccee1489d9452af73391df360a26123580
+
+Total reclaimed space: 1.092GB
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker-compose up --build
+Creating network "docker-complex_default" with the default driver
+Pulling postgres (postgres:latest)...
+latest: Pulling from library/postgres
+8ec398bc0356: Pull complete
+65a7b8e7c8f7: Pull complete
+b7a5676ed96c: Pull complete
+3e0ac8617d40: Pull complete
+633091ee8d02: Pull complete
+b01fa9e356ea: Pull complete
+4cd472257298: Pull complete
+1716325d7dcd: Pull complete
+9b625d69c7c8: Pull complete
+74d8b4d9818c: Pull complete
+c36f5edbeb97: Pull complete
+9b38bb0fb36e: Pull complete
+6b5ee1c74b9a: Pull complete
+5fcc518252b4: Pull complete
+Digest: sha256:3657548977d593c9ab6d70d1ffc43ceb3b5164ae07ac0f542d2ea139664eb6b3
+Status: Downloaded newer image for postgres:latest
+Pulling redis (redis:latest)...
+latest: Pulling from library/redis
+8ec398bc0356: Already exists
+da01136793fa: Pull complete
+cf1486a2c0b8: Pull complete
+188200a8c82e: Pull complete
+9391ca24f5d0: Pull complete
+6ed21f46fa2d: Pull complete
+Digest: sha256:21b037b4f6964887bb12fd8d72d06c7ab1f231a58781b6ca2ceee0febfeb0d36
+Status: Downloaded newer image for redis:latest
+Building nginx
+Step 1/2 : FROM nginx
+latest: Pulling from library/nginx
+8ec398bc0356: Already exists
+465560073b6f: Pull complete
+f473f9fd0a8c: Pull complete
+Digest: sha256:b2d89d0a210398b4d1120b3e3a7672c16a4ba09c2c4a0395f18b9f7999b768f2
+Status: Downloaded newer image for nginx:latest
+ ---> f7bb5701a33c
+Step 2/2 : COPY ./default.conf /etc/nginx/conf.d/default.conf
+ ---> 7d2c2ee975f1
+Successfully built 7d2c2ee975f1
+Successfully tagged docker-complex_nginx:latest
+Building api
+Step 1/6 : FROM node:alpine
+alpine: Pulling from library/node
+e6b0cf9c0882: Pull complete
+ab436df1df6f: Pull complete
+470300a8a365: Pull complete
+84e7c11579ee: Pull complete
+Digest: sha256:b3f6a315aedc31ef3958108ce4926a52b4b4bcc93fca9655737d057de54f8157
+Status: Downloaded newer image for node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR "/app"
+ ---> Running in a2bf6faf6a6f
+Removing intermediate container a2bf6faf6a6f
+ ---> 68d16990e2d5
+Step 3/6 : COPY ./package.json ./
+ ---> 7e9d08d6e417
+Step 4/6 : RUN npm install
+ ---> Running in ec9ba46a25af
+
+> nodemon@1.18.3 postinstall /app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN app No description
+npm WARN app No repository field.
+npm WARN app No license field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 300 packages from 184 contributors and audited 2445 packages in 28.319s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container ec9ba46a25af
+ ---> a93000cb68be
+Step 5/6 : COPY . .
+ ---> 586e5741cd1e
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Running in 3fd0e3bf3ba7
+Removing intermediate container 3fd0e3bf3ba7
+ ---> 55b654bdd51f
+Successfully built 55b654bdd51f
+Successfully tagged docker-complex_api:latest
+Building client
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 68d16990e2d5
+Step 3/6 : COPY ./package.json ./
+ ---> 871612d90180
+Step 4/6 : RUN npm install
+ ---> Running in e77ab617dc92
+npm WARN deprecated left-pad@1.3.0: use String.prototype.padStart()
+npm WARN deprecated core-js@2.6.11: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+
+> core-js@2.6.11 postinstall /app/node_modules/babel-runtime/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon: 
+> https://opencollective.com/core-js 
+> https://www.patreon.com/zloirock 
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+
+> core-js@3.6.1 postinstall /app/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon: 
+> https://opencollective.com/core-js 
+> https://www.patreon.com/zloirock 
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+
+> core-js-pure@3.6.1 postinstall /app/node_modules/core-js-pure
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon: 
+> https://opencollective.com/core-js 
+> https://www.patreon.com/zloirock 
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN sass-loader@8.0.0 requires a peer of node-sass@^4.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN sass-loader@8.0.0 requires a peer of sass@^1.3.0 but none is installed. You must install peer dependencies yourself.
+npm WARN sass-loader@8.0.0 requires a peer of fibers@>= 3.1.0 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/jest-haste-map/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/chokidar/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 1574 packages from 784 contributors in 246.312s
+
+32 packages are looking for funding
+  run `npm fund` for details
+
+Removing intermediate container e77ab617dc92
+ ---> 4740bbf769bd
+Step 5/6 : COPY . .
+ ---> 0fa5a2c30218
+Step 6/6 : CMD ["npm", "run", "start"]
+ ---> Running in f134a7332664
+Removing intermediate container f134a7332664
+ ---> 9be44fbce2b8
+Successfully built 9be44fbce2b8
+Successfully tagged docker-complex_client:latest
+Building worker
+Step 1/6 : FROM node:alpine
+ ---> e1495e4ac50d
+Step 2/6 : WORKDIR "/app"
+ ---> Using cache
+ ---> 68d16990e2d5
+Step 3/6 : COPY ./package.json ./
+ ---> 68edbbca85c0
+Step 4/6 : RUN npm install
+ ---> Running in 23984a6a63ce
+
+> nodemon@1.18.3 postinstall /app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN app No description
+npm WARN app No repository field.
+npm WARN app No license field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 225 packages from 132 contributors and audited 2276 packages in 17.141s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container 23984a6a63ce
+ ---> fd6c8f9f5983
+Step 5/6 : COPY . .
+ ---> 1d879416479f
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Running in e17ffb02a11c
+Removing intermediate container e17ffb02a11c
+ ---> fa350b9459d6
+Successfully built fa350b9459d6
+Successfully tagged docker-complex_worker:latest
+Creating docker-complex_nginx_1    ... done
+Creating docker-complex_api_1      ... done
+Creating docker-complex_postgres_1 ... done
+Creating docker-complex_client_1   ... done
+Creating docker-complex_worker_1   ... done
+Creating docker-complex_redis_1    ... done
+Attaching to docker-complex_postgres_1, docker-complex_worker_1, docker-complex_redis_1, docker-complex_nginx_1, docker-complex_api_1, docker-complex_client_1
+postgres_1  | ****************************************************
+postgres_1  | WARNING: No password has been set for the database.
+postgres_1  |          This will allow anyone with access to the
+postgres_1  |          Postgres port to access your database. In
+postgres_1  |          Docker's default configuration, this is
+postgres_1  |          effectively any other container on the same
+postgres_1  |          system.
+postgres_1  | 
+postgres_1  |          Use "-e POSTGRES_PASSWORD=password" to set
+postgres_1  |          it in "docker run".
+postgres_1  | ****************************************************
+postgres_1  | The files belonging to this database system will be owned by user "postgres".
+postgres_1  | This user must also own the server process.
+postgres_1  | 
+postgres_1  | The database cluster will be initialized with locale "en_US.utf8".
+postgres_1  | The default database encoding has accordingly been set to "UTF8".
+postgres_1  | The default text search configuration will be set to "english".
+postgres_1  | 
+postgres_1  | Data page checksums are disabled.
+postgres_1  | 
+postgres_1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres_1  | creating subdirectories ... ok
+postgres_1  | selecting dynamic shared memory implementation ... posix
+postgres_1  | selecting default max_connections ... 100
+postgres_1  | selecting default shared_buffers ... 128MB
+postgres_1  | selecting default time zone ... Etc/UTC
+postgres_1  | creating configuration files ... ok
+postgres_1  | running bootstrap script ... ok
+postgres_1  | performing post-bootstrap initialization ... ok
+postgres_1  | syncing data to disk ... ok
+postgres_1  | 
+postgres_1  | 
+postgres_1  | Success. You can now start the database server using:
+postgres_1  | 
+postgres_1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres_1  | 
+postgres_1  | initdb: warning: enabling "trust" authentication for local connections
+postgres_1  | You can change this by editing pg_hba.conf or using the option -A, or
+postgres_1  | --auth-local and --auth-host, the next time you run initdb.
+postgres_1  | waiting for server to start....2020-01-01 17:48:02.998 UTC [45] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 17:48:03.003 UTC [45] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+worker_1    | 
+worker_1    | > @ dev /app
+worker_1    | > nodemon
+worker_1    | 
+nginx_1     | 2020/01/01 17:47:59 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+nginx_1     | nginx: [emerg] host not found in upstream "client:3000" in /etc/nginx/conf.d/default.conf:2
+postgres_1  | 2020-01-01 17:48:03.049 UTC [46] LOG:  database system was shut down at 2020-01-01 17:48:01 UTC
+postgres_1  | 2020-01-01 17:48:03.074 UTC [45] LOG:  database system is ready to accept connections
+postgres_1  |  done
+postgres_1  | server started
+postgres_1  | 
+postgres_1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres_1  | 
+postgres_1  | 2020-01-01 17:48:03.114 UTC [45] LOG:  received fast shutdown request
+redis_1     | 1:C 01 Jan 2020 17:47:58.123 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1     | 1:C 01 Jan 2020 17:47:58.123 # Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1     | 1:C 01 Jan 2020 17:47:58.123 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_1     | 1:M 01 Jan 2020 17:47:58.128 * Running mode=standalone, port=6379.
+redis_1     | 1:M 01 Jan 2020 17:47:58.129 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+redis_1     | 1:M 01 Jan 2020 17:47:58.129 # Server initialized
+redis_1     | 1:M 01 Jan 2020 17:47:58.129 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+redis_1     | 1:M 01 Jan 2020 17:47:58.130 * Ready to accept connections
+worker_1    | [nodemon] 1.18.3
+worker_1    | [nodemon] to restart at any time, enter `rs`
+worker_1    | [nodemon] watching: *.*
+worker_1    | [nodemon] starting `node index.js`
+api_1       | 
+api_1       | > @ dev /app
+api_1       | > nodemon
+api_1       | 
+api_1       | [nodemon] 1.18.3
+api_1       | [nodemon] to restart at any time, enter `rs`
+api_1       | [nodemon] watching: *.*
+api_1       | [nodemon] starting `node index.js`
+api_1       | Listening
+postgres_1  | 2020-01-01 17:48:03.121 UTC [45] LOG:  aborting any active transactions
+postgres_1  | 2020-01-01 17:48:03.123 UTC [45] LOG:  background worker "logical replication launcher" (PID 52) exited with exit code 1
+postgres_1  | 2020-01-01 17:48:03.153 UTC [47] LOG:  shutting down
+postgres_1  | waiting for server to shut down....2020-01-01 17:48:03.207 UTC [45] LOG:  database system is shut down
+postgres_1  |  done
+postgres_1  | server stopped
+postgres_1  | 
+postgres_1  | PostgreSQL init process complete; ready for start up.
+postgres_1  | 
+postgres_1  | 2020-01-01 17:48:03.303 UTC [1] LOG:  starting PostgreSQL 12.1 (Debian 12.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres_1  | 2020-01-01 17:48:03.304 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_1  | 2020-01-01 17:48:03.304 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_1  | 2020-01-01 17:48:03.316 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1  | 2020-01-01 17:48:03.362 UTC [54] LOG:  database system was shut down at 2020-01-01 17:48:03 UTC
+postgres_1  | 2020-01-01 17:48:03.391 UTC [1] LOG:  database system is ready to accept connections
+client_1    | 
+client_1    | > client@0.1.0 start /app
+client_1    | > react-scripts start
+client_1    | 
+client_1    | ℹ ｢wds｣: Project is running at http://172.24.0.4/
+client_1    | ℹ ｢wds｣: webpack output is served from /
+client_1    | ℹ ｢wds｣: Content not from webpack is served from /app/public
+client_1    | ℹ ｢wds｣: 404s will fallback to /index.html
+client_1    | Starting the development server...
+client_1    | 
+client_1    | Compiled successfully!
+client_1    | 
+client_1    | You can now view client in the browser.
+client_1    | 
+client_1    |   Local:            http://localhost:3000/
+client_1    |   On Your Network:  http://172.24.0.4:3000/
+client_1    | 
+client_1    | Note that the development build is not optimized.
+client_1    | To create a production build, use npm run build.
+client_1    | 
+postgres_1  | 2020-01-01 17:50:06.365 UTC [64] ERROR:  invalid input syntax for type integer: ""
+postgres_1  | 2020-01-01 17:50:06.365 UTC [64] STATEMENT:  INSERT INTO values(number) VALUES($1)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: error: invalid input syntax for type integer: ""
+api_1       |     at Connection.parseE (/app/node_modules/pg/lib/connection.js:553:11)
+api_1       |     at Connection.parseMessage (/app/node_modules/pg/lib/connection.js:378:19)
+api_1       |     at Socket.<anonymous> (/app/node_modules/pg/lib/connection.js:119:22)
+api_1       |     at Socket.emit (events.js:305:20)
+api_1       |     at addChunk (_stream_readable.js:341:12)
+api_1       |     at readableAddChunk (_stream_readable.js:316:11)
+api_1       |     at Socket.Readable.push (_stream_readable.js:250:10)
+api_1       |     at TCP.onStreamRead (internal/stream_base_commons.js:186:23)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+api_1       | (node:29) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+postgres_1  | 2020-01-01 17:50:06.579 UTC [65] ERROR:  invalid input syntax for type integer: ""
+postgres_1  | 2020-01-01 17:50:06.579 UTC [65] STATEMENT:  INSERT INTO values(number) VALUES($1)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: error: invalid input syntax for type integer: ""
+api_1       |     at Connection.parseE (/app/node_modules/pg/lib/connection.js:553:11)
+api_1       |     at Connection.parseMessage (/app/node_modules/pg/lib/connection.js:378:19)
+api_1       |     at Socket.<anonymous> (/app/node_modules/pg/lib/connection.js:119:22)
+api_1       |     at Socket.emit (events.js:305:20)
+api_1       |     at addChunk (_stream_readable.js:341:12)
+api_1       |     at readableAddChunk (_stream_readable.js:316:11)
+api_1       |     at Socket.Readable.push (_stream_readable.js:250:10)
+api_1       |     at TCP.onStreamRead (internal/stream_base_commons.js:186:23)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+postgres_1  | 2020-01-01 17:50:06.752 UTC [66] ERROR:  invalid input syntax for type integer: ""
+postgres_1  | 2020-01-01 17:50:06.752 UTC [66] STATEMENT:  INSERT INTO values(number) VALUES($1)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: error: invalid input syntax for type integer: ""
+api_1       |     at Connection.parseE (/app/node_modules/pg/lib/connection.js:553:11)
+api_1       |     at Connection.parseMessage (/app/node_modules/pg/lib/connection.js:378:19)
+api_1       |     at Socket.<anonymous> (/app/node_modules/pg/lib/connection.js:119:22)
+api_1       |     at Socket.emit (events.js:305:20)
+api_1       |     at addChunk (_stream_readable.js:341:12)
+api_1       |     at readableAddChunk (_stream_readable.js:316:11)
+api_1       |     at Socket.Readable.push (_stream_readable.js:250:10)
+api_1       |     at TCP.onStreamRead (internal/stream_base_commons.js:186:23)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+postgres_1  | 2020-01-01 17:50:07.207 UTC [67] ERROR:  invalid input syntax for type integer: ""
+postgres_1  | 2020-01-01 17:50:07.207 UTC [67] STATEMENT:  INSERT INTO values(number) VALUES($1)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: error: invalid input syntax for type integer: ""
+api_1       |     at Connection.parseE (/app/node_modules/pg/lib/connection.js:553:11)
+api_1       |     at Connection.parseMessage (/app/node_modules/pg/lib/connection.js:378:19)
+api_1       |     at Socket.<anonymous> (/app/node_modules/pg/lib/connection.js:119:22)
+api_1       |     at Socket.emit (events.js:305:20)
+api_1       |     at addChunk (_stream_readable.js:341:12)
+api_1       |     at readableAddChunk (_stream_readable.js:316:11)
+api_1       |     at Socket.Readable.push (_stream_readable.js:250:10)
+api_1       |     at TCP.onStreamRead (internal/stream_base_commons.js:186:23)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 4)
+postgres_1  | 2020-01-01 17:50:07.867 UTC [68] ERROR:  invalid input syntax for type integer: ""
+postgres_1  | 2020-01-01 17:50:07.867 UTC [68] STATEMENT:  INSERT INTO values(number) VALUES($1)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: error: invalid input syntax for type integer: ""
+api_1       |     at Connection.parseE (/app/node_modules/pg/lib/connection.js:553:11)
+api_1       |     at Connection.parseMessage (/app/node_modules/pg/lib/connection.js:378:19)
+api_1       |     at Socket.<anonymous> (/app/node_modules/pg/lib/connection.js:119:22)
+api_1       |     at Socket.emit (events.js:305:20)
+api_1       |     at addChunk (_stream_readable.js:341:12)
+api_1       |     at readableAddChunk (_stream_readable.js:316:11)
+api_1       |     at Socket.Readable.push (_stream_readable.js:250:10)
+api_1       |     at TCP.onStreamRead (internal/stream_base_commons.js:186:23)
+api_1       | (node:29) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 5)
+^CGracefully stopping... (press Ctrl+C again to force)
+Killing docker-complex_nginx_1     ... done
+Killing docker-complex_api_1       ... done
+Killing docker-complex_postgres_1  ... done
+Killing docker-complex_worker_1    ... done
+Killing docker-complex_client_1    ... done
+Killing docker-complex_redis_1     ... done
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % docker-compose down      
+Removing docker-complex_nginx_1    ... done
+Removing docker-complex_api_1      ... done
+Removing docker-complex_postgres_1 ... done
+Removing docker-complex_worker_1   ... done
+Removing docker-complex_client_1   ... done
+Removing docker-complex_redis_1    ... done
+Removing network docker-complex_default
+fseixas@MacBook-Air-de-Flavio-2 docker-complex % 
